@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://li-chengxun.github.io/img/note/%E8%80%8D%E6%9D%82%E6%8A%80%E7%9A%84%E7%89%9B1.png">
 <meta property="og:image" content="https://li-chengxun.github.io/img/note/%E5%A4%8D%E6%9D%82%E5%BA%A6.png">
 <meta property="article:published_time" content="2022-09-29T09:40:09.137Z">
-<meta property="article:modified_time" content="2022-10-04T02:59:05.569Z">
+<meta property="article:modified_time" content="2022-10-06T03:32:49.167Z">
 <meta property="article:author" content="杰梦舒">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -239,7 +239,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          41k 字
+          42k 字
         
       </span>
     
@@ -250,7 +250,7 @@
         
         
         
-          343 分钟
+          347 分钟
         
       </span>
     
@@ -507,6 +507,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++">queue&lt;<span class="hljs-type">int</span>&gt; q;<br>st[<span class="hljs-number">1</span>] = <span class="hljs-literal">true</span>; <span class="hljs-comment">// 表示1号点已经被遍历过</span><br>q.<span class="hljs-built_in">push</span>(<span class="hljs-number">1</span>);<br><br><span class="hljs-keyword">while</span> (q.<span class="hljs-built_in">size</span>())<br>&#123;<br>    <span class="hljs-type">int</span> t = q.<span class="hljs-built_in">front</span>();<br>    q.<span class="hljs-built_in">pop</span>();<br><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = h[t]; i != <span class="hljs-number">-1</span>; i = ne[i])<br>    &#123;<br>        <span class="hljs-type">int</span> j = e[i];<br>        <span class="hljs-keyword">if</span> (!st[j])<br>        &#123;<br>            st[j] = <span class="hljs-literal">true</span>; <span class="hljs-comment">// 表示点j已经被遍历过</span><br>            q.<span class="hljs-built_in">push</span>(j);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <h3 id="拓补排序"><a href="#拓补排序" class="headerlink" title="拓补排序"></a>拓补排序</h3><p>拓补排序指的是，找到一个出度为零的点，把这个点处理之后，指向他的点出度都减一，以此类推，最后如果所有数都处理了，那么就存在拓扑排序。</p>
+<p>例题：<a target="_blank" rel="noopener" href="https://leetcode.cn/problems/course-schedule/">207.课程表</a></p>
 <p>时间复杂度 O(n+m), n表示点数，m 表示边数</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">topsort</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> hh = <span class="hljs-number">0</span>, tt = <span class="hljs-number">-1</span>;<br><br>    <span class="hljs-comment">// d[i] 存储点i的入度</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i ++ )<br>        <span class="hljs-keyword">if</span> (!d[i])<br>            q[ ++ tt] = i;<br><br>    <span class="hljs-keyword">while</span> (hh &lt;= tt)<br>    &#123;<br>        <span class="hljs-type">int</span> t = q[hh ++ ];<br><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = h[t]; i != <span class="hljs-number">-1</span>; i = ne[i])<br>        &#123;<br>            <span class="hljs-type">int</span> j = e[i];<br>            <span class="hljs-keyword">if</span> (-- d[j] == <span class="hljs-number">0</span>)<br>                q[ ++ tt] = j;<br>        &#125;<br>    &#125;<br><br>    <span class="hljs-comment">// 如果所有点都入队了，说明存在拓扑序列；否则不存在拓扑序列。</span><br>    <span class="hljs-keyword">return</span> tt == n - <span class="hljs-number">1</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -616,8 +617,8 @@
 <h3 id="约数"><a href="#约数" class="headerlink" title="约数"></a>约数</h3><p><strong>试除法求所有约数</strong> —— <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/871/">模板题</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">vector&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">get_divisors</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>    vector&lt;<span class="hljs-type">int</span>&gt; res;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt;= x / i; i ++ )<br>        <span class="hljs-keyword">if</span> (x % i == <span class="hljs-number">0</span>)<br>        &#123;<br>            res.<span class="hljs-built_in">push_back</span>(i);<br>            <span class="hljs-keyword">if</span> (i != x / i) res.<span class="hljs-built_in">push_back</span>(x / i);<br>        &#125;<br>    <span class="hljs-built_in">sort</span>(res.<span class="hljs-built_in">begin</span>(), res.<span class="hljs-built_in">end</span>());<br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p><strong>约数个数和约数之和</strong> —— <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/872/,https://www.acwing.com/problem/content/872/">模板题</a><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/873/">2</a></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">如果 N = p1^c1 * p2^c2 * ... *pk^ck<br>约数个数： (c1 + <span class="hljs-number">1</span>) * (c2 + <span class="hljs-number">1</span>) * ... * (ck + <span class="hljs-number">1</span>)<span class="hljs-comment">//算数基本定理</span><br>约数之和： (p1^<span class="hljs-number">0</span> + p1^<span class="hljs-number">1</span> + ... + p1^c1) * ... * (pk^<span class="hljs-number">0</span> + pk^<span class="hljs-number">1</span> + ... + pk^ck)<br></code></pre></td></tr></table></figure>
+<p><strong>约数个数和约数之和</strong> —— <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/872/">模板题</a><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/873/">模板题2</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">如果 N = p1^c1 * p2^c2 * ... *pk^ck<span class="hljs-comment">//pi是质数，ci是pi的次数</span><br>约数个数： (c1 + <span class="hljs-number">1</span>) * (c2 + <span class="hljs-number">1</span>) * ... * (ck + <span class="hljs-number">1</span>)<span class="hljs-comment">//算数基本定理</span><br>约数之和： (p1^<span class="hljs-number">0</span> + p1^<span class="hljs-number">1</span> + ... + p1^c1) * ... * (pk^<span class="hljs-number">0</span> + pk^<span class="hljs-number">1</span> + ... + pk^ck)<br></code></pre></td></tr></table></figure>
 
 <p><strong>欧几里得算法（辗转相除法）</strong> —— <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/874/">模板题</a></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/*</span><br><span class="hljs-comment">什么是辗转相除法（GCD）呢？</span><br><span class="hljs-comment">例如，我们求24和60的最大公约数，假设最大公约数为m，所以24和60都可以被m整除，60可以表示为24+36，所以36也可以被m整除，所以问题就转化为求24和36的最大公约数，而36可以表示为24+12，以此类推，知道其中一个为0为止。</span><br><span class="hljs-comment">*/</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> b ? <span class="hljs-built_in">gcd</span>(b, a % b) : a;<br>&#125;<br></code></pre></td></tr></table></figure>
@@ -626,7 +627,11 @@
 <p>a≡b(modn)表示a与b对模n同余。</p>
 <p>“≡”是数论中表示同余的符号。</p>
 </blockquote>
-<p>应用：欧拉定理。&#x2F;&#x2F;待补充欧拉定理内容</p>
+<p>应用：欧拉定理。</p>
+<blockquote>
+<p>对任意两个正整数 a , n .若两者素质，则：a^φ(n)^ ≡ 1(mod n) 。</p>
+<p>注：作为对比，费马小定理（a^p−1^ ≡ 1(mod p) ,实际上就是欧拉公式的特殊情况。</p>
+</blockquote>
 <p><strong>求欧拉函数</strong> —— <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/875/">模板题</a></p>
 <p>欧拉函数定义：</p>
 <p><img src="/img/note/%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0.png" srcset="/img/loading.gif" lazyload></p>
@@ -635,7 +640,27 @@
 </blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">phi</span><span class="hljs-params">(<span class="hljs-type">int</span> x)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-type">int</span> res = x;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= x / i; i ++ )<br>        <span class="hljs-keyword">if</span> (x % i == <span class="hljs-number">0</span>)<br>        &#123;<br>            res = res / i * (i - <span class="hljs-number">1</span>);<br>            <span class="hljs-keyword">while</span> (x % i == <span class="hljs-number">0</span>) x /= i;<br>        &#125;<br>    <span class="hljs-keyword">if</span> (x &gt; <span class="hljs-number">1</span>) res = res / x * (x - <span class="hljs-number">1</span>);<br><br>    <span class="hljs-keyword">return</span> res;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<p>:heavy_exclamation_mark:(不是很理解，待补充)<strong>筛法求欧拉函数</strong> —— <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/876/">模板题</a></p>
+<p><strong>筛法求欧拉函数</strong> —— <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/876/">模板题</a></p>
+<p>思路：</p>
+<p>考虑三种情况：</p>
+<ul>
+<li>当i是质数时，i的欧拉函数值为<code>phi[i] = i - 1</code>,因为质数p除了1以外的因数只有p，故1至p的整数只有p与p不互质。</li>
+<li>phi[j]是i的质因子时，<code>phi[i*primes[j]] = phi[i]*primes[j]</code>。</li>
+<li>phi[j]不是i的质因子时，<code>phi[i*primes[j]] = phi[i]*(primes[j] - 1)</code>。</li>
+</ul>
+<blockquote>
+<p>证明：</p>
+<p>对于第二种情况：</p>
+<p><code>phi[i] = i*(1 - 1/p1)(1 - 1/p2)....</code></p>
+<p><code>phi[primes[j]*i] = p[j]*i(1 - 1/p1)(1 - 1/p2)....</code>	</p>
+<p>可以看出后半部分相同，所以可得：</p>
+<p><code>phi[i*primes[j]] = phi[i]*primes[j]</code></p>
+<p>对于第三种情况：</p>
+<p><code>phi[i] = i*(1 - 1/p1)(1 - 1/p2)....</code></p>
+<p><code>phi[primes[j]*i] = p[j]*i(1 - 1/p1)(1 - 1/p2)....(1 - 1/primes[j])</code></p>
+<p>化简可得：</p>
+<p>​	<code>phi[i*primes[j]] = phi[i]*(primes[j] - 1)</code></p>
+</blockquote>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-type">int</span> primes[N], cnt;     <span class="hljs-comment">// primes[]存储所有素数</span><br><span class="hljs-type">int</span> euler[N];           <span class="hljs-comment">// 存储每个数的欧拉函数</span><br><span class="hljs-type">bool</span> st[N];         <span class="hljs-comment">// st[x]存储x是否被筛掉</span><br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">get_eulers</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>    euler[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; i ++ )<br>    &#123;<br>        <span class="hljs-keyword">if</span> (!st[i])<br>        &#123;<br>            primes[cnt ++] = i;<br>            euler[i] = i - <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; primes[j] &lt;= n / i; j ++ )<br>        &#123;<br>            <span class="hljs-type">int</span> t = primes[j] * i;<br>            st[t] = <span class="hljs-literal">true</span>;<br>            <span class="hljs-keyword">if</span> (i % primes[j] == <span class="hljs-number">0</span>)<br>            &#123;<br>                euler[t] = euler[i] * primes[j];<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>            euler[t] = euler[i] * (primes[j] - <span class="hljs-number">1</span>);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
@@ -654,8 +679,6 @@
 <p>推导：</p>
 <p>根据层层递归，对于当前层来说：<code>ax + by = gcd(a,b) = gcd(b,(a%b)) </code>然后传到下一层：<code>gcd(b,(a%b)) = b*x1+(a%b)*y1</code>,把<code>a%b=a-(a/b)*b</code>代入得<code>a*y1 + b*(x1 – a/b*y1)</code>,可以看出<code>x = y1 , y = x1 – a/b*y1</code>,所以我们在传数的时候，可以把x，y倒过来传，这样，x可以不变，y根据公式计算。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 求x, y，使得ax + by = gcd(a, b),gcd</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">exgcd</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b, <span class="hljs-type">int</span> &amp;x, <span class="hljs-type">int</span> &amp;y)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">if</span> (!b)<br>    &#123;<br>        x = <span class="hljs-number">1</span>; y = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">return</span> a;<br>    &#125;<br>    <span class="hljs-type">int</span> d = <span class="hljs-built_in">exgcd</span>(b, a % b, y, x);<br>    y -= (a/b) * x;<br>    <span class="hljs-keyword">return</span> d;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-
 
 <h3 id="中国剩余定理"><a href="#中国剩余定理" class="headerlink" title="中国剩余定理"></a>中国剩余定理</h3><h3 id="高斯消元"><a href="#高斯消元" class="headerlink" title="高斯消元"></a>高斯消元</h3><p>高斯消元 —— <a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/885/">模板题</a></p>
 <p>步骤：</p>

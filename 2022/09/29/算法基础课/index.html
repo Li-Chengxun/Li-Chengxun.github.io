@@ -43,7 +43,7 @@
 <meta property="og:image" content="https://li-chengxun.github.io/img/note/%E8%80%8D%E6%9D%82%E6%8A%80%E7%9A%84%E7%89%9B1.png">
 <meta property="og:image" content="https://li-chengxun.github.io/img/note/%E5%A4%8D%E6%9D%82%E5%BA%A6.png">
 <meta property="article:published_time" content="2022-09-29T09:40:09.137Z">
-<meta property="article:modified_time" content="2022-10-06T03:32:49.167Z">
+<meta property="article:modified_time" content="2022-10-06T03:56:33.184Z">
 <meta property="article:author" content="杰梦舒">
 <meta property="article:tag" content="算法学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -644,12 +644,14 @@
 <p>思路：</p>
 <p>考虑三种情况：</p>
 <ul>
-<li>当i是质数时，i的欧拉函数值为<code>phi[i] = i - 1</code>,因为质数p除了1以外的因数只有p，故1至p的整数只有p与p不互质。</li>
+<li>当i是质数时，i的欧拉函数值为<code>phi[i] = i - 1</code>。</li>
 <li>phi[j]是i的质因子时，<code>phi[i*primes[j]] = phi[i]*primes[j]</code>。</li>
 <li>phi[j]不是i的质因子时，<code>phi[i*primes[j]] = phi[i]*(primes[j] - 1)</code>。</li>
 </ul>
 <blockquote>
 <p>证明：</p>
+<p>对于第一种情况:</p>
+<p>质数p除了1以外的因数只有p，故1至p的整数只有p与p不互质，所以为<code>phi[i] = i - 1</code></p>
 <p>对于第二种情况：</p>
 <p><code>phi[i] = i*(1 - 1/p1)(1 - 1/p2)....</code></p>
 <p><code>phi[primes[j]*i] = p[j]*i(1 - 1/p1)(1 - 1/p2)....</code>	</p>
